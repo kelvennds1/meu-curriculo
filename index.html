@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelven Cristian - Desenvolvedor Full-Stack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #2c3e50;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+        .skill-tag {
+            transition: all 0.3s ease;
+        }
+        .timeline-item-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .timeline-item-content.open {
+            max-height: 500px;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 40vh;
+            width: 80vw;
+            max-width: 450px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-xl font-bold text-gray-800">
+                Kelven Cristian
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#sobre" class="nav-link pb-1">Sobre</a>
+                <a href="#habilidades" class="nav-link pb-1">Habilidades</a>
+                <a href="#experiencia" class="nav-link pb-1">Experiência</a>
+                <a href="#formacao" class="nav-link pb-1">Formação</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#sobre" class="block py-2 px-4 text-sm hover:bg-gray-200">Sobre</a>
+            <a href="#habilidades" class="block py-2 px-4 text-sm hover:bg-gray-200">Habilidades</a>
+            <a href="#experiencia" class="block py-2 px-4 text-sm hover:bg-gray-200">Experiência</a>
+            <a href="#formacao" class="block py-2 px-4 text-sm hover:bg-gray-200">Formação</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="hero" class="text-center py-16">
+            <h1 class="text-5xl md:text-6xl font-bold text-gray-800 leading-tight">Kelven Cristian</h1>
+            <p class="text-xl md:text-2xl text-gray-600 mt-4">Desenvolvedor Full-Stack & Estudante de Ciência da Computação</p>
+            <div class="mt-8 flex justify-center items-center space-x-6">
+                <a href="mailto:kelvencrstn@gmail.com" class="text-gray-600 hover:text-[#3498db] transition duration-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/kelven-cristian-4b1133187" target="_blank" class="text-gray-600 hover:text-[#3498db] transition duration-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zm-7 5.07h-2.9v7h2.9v-7zm-1.45-2.2a1.65 1.65 0 1 0 0-3.3 1.65 1.65 0 0 0 0 3.3zM16.07 8h-2.87v2.1h.04c.3-.58 1.02-1.2 2.43-1.2C18.5 8.9 19 10.5 19 12.6v3.47h-2.93V13c0-.96-.02-2.18-1.33-2.18-1.33 0-1.54 1.04-1.54 2.1v3.15H10.3V8.07h2.8v1.27h.04c.38-.72 1.3-1.27 2.65-1.27.28 0 2.28.14 2.28 2.93V16z"/></svg>
+                </a>
+                <a href="https://github.com/kelvennds1" target="_blank" class="text-gray-600 hover:text-[#3498db] transition duration-300">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.65.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.942.359.308.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.578.688.48C19.135 20.165 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                </a>
+            </div>
+            <div class="mt-10">
+                <a href="https://docs.google.com/document/d/1V4tR-0crZbODSU09IFFs283Ke4CnMG8ahXkAJ8eExx8/edit?tab=t.0" class="bg-[#3498db] text-white font-bold py-3 px-8 rounded-full hover:bg-[#2980b9] transition duration-300 inline-flex items-center shadow-lg">
+                    <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"></path></svg>
+                    <span>Download CV (PDF)</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="sobre" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800">Sobre Mim</h2>
+                <div class="w-24 h-1 bg-[#3498db] mx-auto mt-4"></div>
+            </div>
+            <div class="max-w-3xl mx-auto text-center text-gray-600 text-lg leading-relaxed">
+                <p>Estudante de Ciência da Computação com experiência prática em desenvolvimento full-stack. Atuei na criação de aplicações mobile híbridas com React Native, no desenvolvimento de microserviços backend com Python (Flask) e em projetos de análise de dados. Busco uma oportunidade de estágio para aplicar e expandir meus conhecimentos em um ambiente dinâmico, colaborativo e focado em tecnologias modernas.</p>
+                <div class="mt-6 bg-blue-50 border-l-4 border-blue-400 p-4 rounded-r-lg">
+                    <p class="font-semibold">Idiomas:</p>
+                    <p>Português (Nativo), Inglês (Profissional)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="habilidades" class="py-16 bg-white rounded-xl shadow-md">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800">Habilidades Técnicas</h2>
+                <p class="text-lg text-gray-500 mt-2">Uma visão geral das tecnologias com que trabalho.</p>
+                <div class="w-24 h-1 bg-[#3498db] mx-auto mt-4"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="px-4">
+                    <div class="flex justify-center flex-wrap gap-2 mb-6" id="skill-filters">
+                        <button data-filter="all" class="skill-filter-btn bg-blue-500 text-white px-4 py-2 rounded-full text-sm">Todas</button>
+                        <button data-filter="Backend" class="skill-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm">Backend</button>
+                        <button data-filter="Frontend" class="skill-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm">Frontend</button>
+                        <button data-filter="Mobile" class="skill-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm">Mobile</button>
+                        <button data-filter="DevOps" class="skill-filter-btn bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm">Cloud & DevOps</button>
+                    </div>
+                    <div id="skills-container" class="flex flex-wrap justify-center gap-3">
+                        <!-- Skills will be injected here by JS -->
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="experiencia" class="py-16">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800">Experiência Profissional</h2>
+                <p class="text-lg text-gray-500 mt-2">Clique em cada cargo para ver mais detalhes.</p>
+                <div class="w-24 h-1 bg-[#3498db] mx-auto mt-4"></div>
+            </div>
+            <div id="timeline-container" class="relative max-w-3xl mx-auto">
+                <div class="absolute left-1/2 h-full w-0.5 bg-gray-300 transform -translate-x-1/2"></div>
+                <!-- Timeline items will be injected here by JS -->
+            </div>
+        </section>
+
+        <section id="formacao" class="py-16">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-800">Formação Acadêmica</h2>
+                <div class="w-24 h-1 bg-[#3498db] mx-auto mt-4"></div>
+            </div>
+            <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-8">
+                    <div class="uppercase tracking-wide text-sm text-[#3498db] font-semibold">Universidade de Brasília (UnB)</div>
+                    <p class="block mt-1 text-lg leading-tight font-medium text-black">Bacharelado em Ciência da Computação</p>
+                    <p class="mt-2 text-gray-500">Início: Julho de 2020 – Previsão de Conclusão: Dezembro de 2026</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white text-center p-6">
+        <p>&copy; 2025 Kelven Cristian. Todos os direitos reservados.</p>
+        <p class="text-sm text-gray-400 mt-2">Construído com Tailwind CSS e Chart.js</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            const skillsData = [
+                { name: 'React Native', category: 'Mobile' },
+                { name: 'Flutter', category: 'Mobile' },
+                { name: 'React', category: 'Frontend' },
+                { name: 'JavaScript (ES6+)', category: 'Frontend' },
+                { name: 'TypeScript', category: 'Frontend' },
+                { name: 'Python', category: 'Backend' },
+                { name: 'Flask', category: 'Backend' },
+                { name: 'FastAPI', category: 'Backend' },
+                { name: 'Node.js', category: 'Backend' },
+                { name: 'C# (.NET Core)', category: 'Backend' },
+                { name: 'PostgreSQL', category: 'Databases' },
+                { name: 'MySQL', category: 'Databases' },
+                { name: 'SQL Server', category: 'Databases' },
+                { name: 'AWS', category: 'DevOps' },
+                { name: 'Docker', category: 'DevOps' },
+                { name: 'NGINX', category: 'DevOps' },
+                { name: 'CI/CD', category: 'DevOps' },
+                { name: 'Git', category: 'Outras' },
+                { name: 'Postman', category: 'Outras' },
+                { name: 'Scrum', category: 'Outras' },
+                { name: 'Kanban', category: 'Outras' },
+                { name: 'Figma', category: 'Outras' },
+            ];
+
+            const skillsContainer = document.getElementById('skills-container');
+            skillsData.forEach(skill => {
+                const skillEl = document.createElement('span');
+                skillEl.className = 'skill-tag bg-gray-100 text-gray-800 text-sm font-medium px-4 py-2 rounded-lg';
+                skillEl.textContent = skill.name;
+                skillEl.dataset.category = skill.category;
+                skillsContainer.appendChild(skillEl);
+            });
+            
+            const skillFilters = document.getElementById('skill-filters');
+            skillFilters.addEventListener('click', (e) => {
+                if (e.target.classList.contains('skill-filter-btn')) {
+                    const filter = e.target.dataset.filter;
+
+                    document.querySelectorAll('.skill-filter-btn').forEach(btn => {
+                        btn.classList.remove('bg-blue-500', 'text-white');
+                        btn.classList.add('bg-gray-200', 'text-gray-700');
+                    });
+                    e.target.classList.add('bg-blue-500', 'text-white');
+                    e.target.classList.remove('bg-gray-200', 'text-gray-700');
+
+                    document.querySelectorAll('.skill-tag').forEach(tag => {
+                        if (filter === 'all' || tag.dataset.category === filter) {
+                            tag.style.opacity = '1';
+                            tag.style.transform = 'scale(1)';
+                        } else {
+                            tag.style.opacity = '0.3';
+                            tag.style.transform = 'scale(0.9)';
+                        }
+                    });
+                }
+            });
+
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Backend', 'Frontend', 'Mobile', 'Cloud & DevOps', 'Bancos de Dados'],
+                    datasets: [{
+                        label: 'Nível de Experiência',
+                        data: [85, 75, 80, 70, 75],
+                        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                        borderColor: 'rgba(52, 152, 219, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(52, 152, 219, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 14,
+                                    family: 'Inter'
+                                },
+                                color: '#2c3e50'
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(248, 247, 244, 0)',
+                                color: 'rgba(44, 62, 80, 0.6)',
+                                stepSize: 25,
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+
+            const timelineData = [
+                {
+                    role: 'Desenvolvedor Full Stack',
+                    company: 'TICÊ Tecnologias em Saúde',
+                    date: 'Novembro de 2023 – Presente',
+                    side: 'left',
+                    details: [
+                        'Participei ativamente do desenvolvimento de aplicativos móveis multiplataforma utilizando React Native, desde a prototipação no Figma até a integração com APIs RESTful e publicação nas lojas.',
+                        'Desenvolvi e mantive microserviços em Flask para o backend, aplicando conceitos de Clean Architecture e Domain-Driven Design (DDD).',
+                        'Implementei e gerenciei pipelines de CI/CD com GitHub Actions para automação de deploy de containers Docker na infraestrutura AWS.',
+                        'Colaborei em um ambiente ágil, utilizando Scrum e Kanban para o planejamento e entrega contínua de funcionalidades.'
+                    ]
+                },
+                {
+                    role: 'Analista de Dados (Estágio)',
+                    company: 'Vivo (Telefônica Brasil)',
+                    date: 'Março de 2024 – Presente',
+                    side: 'right',
+                    details: [
+                        'Desenvolvo e mantenho pipelines para coleta, tratamento e visualização de grandes volumes de dados, utilizando SQL e Power BI.',
+                        'Crio dashboards e relatórios que fornecem insights e suportam a tomada de decisão estratégica para as áreas de negócio.'
+                    ]
+                },
+                {
+                    role: 'Desenvolvedor ServiceNow (Trainee)',
+                    company: 'Chain Academy',
+                    date: 'Maio de 2025 – Presente',
+                    side: 'left',
+                    details: [
+                        'Participo de um programa de formação intensiva na plataforma ServiceNow, com foco em administração, scripting e desenvolvimento de aplicações customizadas.'
+                    ]
+                },
+                {
+                    role: 'Estagiário de TI',
+                    company: 'Viva Previdência',
+                    date: 'Outubro de 2022 – Fevereiro de 2024',
+                    side: 'right',
+                    details: [
+                        'Prestei suporte técnico (N2/N3) e auxiliei na manutenção da infraestrutura de TI, incluindo gerenciamento de Active Directory e Azure AD.',
+                        'Apoiei o desenvolvimento de sistemas internos utilizando C# e ASP.NET.'
+                    ]
+                }
+            ];
+
+            const timelineContainer = document.getElementById('timeline-container');
+            timelineData.forEach((item, index) => {
+                const sideClass = item.side === 'left' ? 'md:flex-row-reverse' : '';
+                const timelineItem = `
+                    <div class="timeline-item mb-8 flex justify-between items-center w-full ${sideClass}">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-blue-500 shadow-xl w-8 h-8 rounded-full">
+                            <h1 class="mx-auto font-semibold text-lg text-white">${timelineData.length - index}</h1>
+                        </div>
+                        <div class="order-1 bg-white rounded-lg shadow-xl w-5/12 px-6 py-4 cursor-pointer timeline-item-header">
+                            <h3 class="font-bold text-gray-800 text-lg">${item.role}</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-600 font-semibold">${item.company}</p>
+                            <p class="text-sm leading-snug tracking-wide text-gray-500">${item.date}</p>
+                            <div class="timeline-item-content">
+                                <ul class="list-disc list-inside mt-2 text-gray-600 text-sm space-y-1">
+                                    ${item.details.map(d => `<li>${d}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                timelineContainer.innerHTML += timelineItem;
+            });
+            
+            document.querySelectorAll('.timeline-item-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.querySelector('.timeline-item-content');
+                    content.classList.toggle('open');
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
